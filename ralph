@@ -90,6 +90,24 @@ if someOperationsExecuted:
 	# Reset someOperationsExecuted to prevent a double line break.
 	someOperationsExecuted = False
 
+def generate_help(alias, blueprint_data):
+	alias.write('\n\t')
+	alias.write('\n\tif [ ${parameters[0]} = "help" ] ; then')
+	alias.write('\n\t\techo \"Usage: ' + blueprint_data["blueprint"] + '\"')
+	if 'help' in blueprint_data:
+		alias.write('\n\t\techo \"' + blueprint_data["help"] + '\"')
+	alias.write('\n\t')
+
+	for index, argument in enumerate(data['arguments']):
+		alias.write('\n\t\techo \"  ' + argument + ':\"')
+		if 'help' in data['arguments'][argument]:
+			alias.write('\n\t\techo \"    ' + data['arguments'][argument]["help"] + '\"')
+		if 'values' in data['arguments'][argument]:
+			alias.write('\n\t\techo \"    Available options: ' + ', '.join(data['arguments'][argument]['values'].keys()) + '\"')
+	alias.write('\n\t\texit 1')
+	alias.write('\n\tfi')
+
+
 # Is the blueprint valid?
 def validate_blueprint(blueprint_json):
 	try:
@@ -152,6 +170,8 @@ for blueprint in os.listdir(configuration['blueprints'].replace('~', home)):
 	if 'arguments' in data:
 		# Obtaining alias arguments.
 		alias.write('\n\tparameters=(${@:1:$(($#-($#-' + str(len(data['arguments'])) + ')))})')
+
+		generate_help(alias, data)
 
 		alias.write('\n\n\tcase ${#parameters[@]} in')
 
