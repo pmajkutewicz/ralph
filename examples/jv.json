@@ -1,6 +1,7 @@
 {
 	"blueprint": "jv {*class}",
 	"command": "javac {class}.java; java {class}",
+	"help": "Compiles java class",
 
 	"arguments": {
 		"class": {

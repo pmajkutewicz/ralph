@@ -1,6 +1,7 @@
 {
 	"blueprint": "minus {*one} {*two}",
 	"command": "expr {one} - {two}",
+	"help": "Nothing much to say, does A - B",
 
 	"arguments": {
 		"one": {

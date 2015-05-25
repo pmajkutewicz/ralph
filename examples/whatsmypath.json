@@ -1,4 +1,5 @@
 {
 	"blueprint": "whatsmypath",
-	"command": "echo $PATH"
+	"command": "echo $PATH",
+	"help": "Shows my path"
 }

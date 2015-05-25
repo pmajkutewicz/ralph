@@ -1,12 +1,14 @@
 {
 	"blueprint": "digitalocean {*user?} {~server?}",
 	"command": "ssh {user}@{server}",
+	"help": "Connects to ssh server using provided user",
 
 	"arguments": {
 		"user": {
 			"values": {
 				"default": "root"
-			}
+			},
+			"help": "User name"
 		},
 		"server": {
 			"values": {
@@ -15,6 +17,7 @@
 				"website": "123.456.78.910",
 				"git": "91.876.54.321"
 			},
+			"help": "Server name",
 			"errors": {
 				"invalid": "I've never heard of {server}."
 			}
