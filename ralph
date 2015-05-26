@@ -92,14 +92,15 @@ if someOperationsExecuted:
 
 def generate_help(alias, blueprint_data):
 	alias.write('\n\t')
-	alias.write('\n\tif [ ${parameters[0]} = "help" ] ; then')
+	alias.write('\n\tif [ "${parameters[0]}" = "help" ] ; then')
 	alias.write('\n\t\techo \"Usage: ' + blueprint_data["blueprint"] + '\"')
 	if 'help' in blueprint_data:
 		alias.write('\n\t\techo \"' + blueprint_data["help"] + '\"')
 	alias.write('\n\t')
 
+	alias.write('\n\techo \"  Arguments:\"')
 	for index, argument in enumerate(data['arguments']):
-		alias.write('\n\t\techo \"  ' + argument + ':\"')
+		alias.write('\n\t\techo \"  - ' + argument + '\"')
 		if 'help' in data['arguments'][argument]:
 			alias.write('\n\t\techo \"    ' + data['arguments'][argument]["help"] + '\"')
 		if 'values' in data['arguments'][argument]:
